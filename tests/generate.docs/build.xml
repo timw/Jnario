@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<project name="generate-docs"
+		xmlns:ivy="antlib:org.apache.ivy.ant"
+		xmlns:jnario="antlib:org.jnario"
+>
+	<property name="ivysettings.central.file" value="ivysettings.central.xml"/>
+	<property name="jnario.ivy.file" value="ivy.xml"/>
+	<property name="jnario.report.dir" value="target/jnario-doc"/>
+	<property name="test.results.dir" value="target/surefire-reports"/>
+	<property name="src.test.java.dir" value="src/test/java"/>
+
+
+	<taskdef resource="org/apache/ivy/ant/antlib.xml" uri="antlib:org.apache.ivy.ant">
+		<classpath>
+			<fileset dir="lib" includes="*.jar"/>
+		</classpath>
+	</taskdef>
+
+	<target name="jnario.fetch">
+		<ivy:configure
+			settingsId="local.jnario.ivy"
+			file="${ivysettings.central.file}"
+			override="true" />
+		<ivy:cachepath
+			file="${jnario.ivy.file}"
+			settingsRef="local.jnario.ivy"
+			pathid="jnario.compiler.classpath"
+			conf="compile"
+			type="bundle,jar" />
+
+		<taskdef name="report" classname="org.jnario.compiler.ReportTask" uri="antlib:org.jnario">
+			<classpath refid="jnario.compiler.classpath"/>
+		</taskdef>
+	</target>
+
+	<target name="jnario.report" depends="jnario.fetch">
+		<jnario:report
+			outputpath="${jnario.report.dir}"
+			resultfolder="${test.results.dir}"
+			sourcepath="${src.test.java.dir}" />
+	</target>
+
+	
+</project>

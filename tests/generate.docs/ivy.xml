@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ivy-module version="1.0">
+  <info module="" organisation="">
+  </info>
+  <configurations>
+  	<conf name="compile"/>
+  	<conf name="runtime"/>
+  </configurations>
+  <publications>
+  </publications>
+  <dependencies>
+    <dependency conf="compile->default" org="org.jnario" name="org.jnario.standalone" rev="1.0.0" />
+    <dependency conf="compile->default" org="org.eclipse.xtend" name="org.eclipse.xtend.core" rev="2.6.2" />
+    <dependency conf="compile->default" org="commons-lang" name="commons-lang" rev="2.6" />
+    <dependency conf="runtime->default" org="org.jnario" name="org.jnario.lib" rev="1.0.0" />
+    <exclude org="asm" module="asm" />
+  </dependencies>
+</ivy-module>
